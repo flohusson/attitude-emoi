@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SITE_URL } from "@/lib/constants";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const jost = Jost({
   variable: "--font-jost",
@@ -32,6 +33,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <GoogleAnalytics gaId="G-L6NBDNZ7D3" />
       </body>
     </html>
   );
