@@ -1,5 +1,5 @@
-
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { LayoutDashboard, PenSquare, Globe, LogOut, Sparkles } from 'lucide-react';
 
 
@@ -8,6 +8,11 @@ export default function AdminLayout({
 }: {
     children: React.ReactNode;
 }) {
+    // SECURITY: Admin panel is only available in local development
+    // In production (Vercel), this route will return a 404 Not Found
+    if (process.env.NODE_ENV !== 'development') {
+        notFound();
+    }
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <header className="bg-white border-b border-gray-200">
