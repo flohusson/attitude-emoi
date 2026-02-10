@@ -85,7 +85,7 @@ export default async function PodcastPage() {
                                 <p className="text-foreground/70 border-t border-gray-100 pt-6">
                                     Le format solo.
                                     <br />
-                                    Des réflexions intimes et directes sur <b>l'hypersensibilité</b>, la <b>masculinité</b> et la <b>quête de sens</b>.
+                                    Des réflexions intimes et directes sur l'hypersensibilité, la masculinité et la quête de sens.
                                 </p>
                                 <span className="inline-block px-8 py-3 bg-primary text-white font-bold rounded-full mt-4 group-hover:bg-primary/90 transition-colors">
                                     Explorer les épisodes →
@@ -104,7 +104,7 @@ export default async function PodcastPage() {
                                 <p className="text-foreground/70 border-t border-gray-100 pt-6">
                                     Le format interview.
                                     <br />
-                                    Des échanges profonds avec des <b>invités inspirants</b> qui partagent leur parcours et leur vulnérabilité.
+                                    Des échanges profonds avec des invités inspirants qui partagent leur parcours et leur vulnérabilité.
                                 </p>
                                 <span className="inline-block px-8 py-3 bg-secondary text-white font-bold rounded-full mt-4 group-hover:bg-secondary/90 transition-colors">
                                     Explorer les discussions →

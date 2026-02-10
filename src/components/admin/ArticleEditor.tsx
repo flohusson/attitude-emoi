@@ -45,12 +45,16 @@ export default function ArticleEditor({ initialData, allArticles = [] }: Article
 
     const [slugTouched, setSlugTouched] = useState(false);
 
-    // Filter categories that have sub-items (exclude 'Podcast', 'About')
-    const categoryOptions = NAVIGATION_ITEMS.filter(item => item.subItems);
+    // Filter categories that have sub-items (including sections from Mega Menu)
+    const categoryOptions = NAVIGATION_ITEMS.flatMap(item => {
+        if (item.sections) return item.sections;
+        if (item.subItems) return [item];
+        return [];
+    });
 
     useEffect(() => {
         if (selectedCategory) {
-            const cat = NAVIGATION_ITEMS.find(item => item.label === selectedCategory);
+            const cat = categoryOptions.find(item => item.label === selectedCategory);
             if (cat && cat.subItems) {
                 setSubCategories(cat.subItems);
             } else {

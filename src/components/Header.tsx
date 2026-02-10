@@ -42,14 +42,14 @@ export default function Header() {
 
     return (
         <header className={`sticky top-0 z-[999] w-full border-b border-border/40 bg-background/40 md:bg-background/80 backdrop-blur-md transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-            <div className="mx-auto flex h-20 w-full items-center px-4 sm:px-8 lg:px-12">
+            <div className="mx-auto flex h-20 w-full items-center px-4 sm:px-8 lg:px-12 relative">
                 {/* Logo / Nom du site */}
-                <div className="flex items-center gap-2">
+                <div className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center gap-2">
                     <Link href="/" className="hover:opacity-90 transition-opacity">
                         <img
-                            src="/logo.svg"
+                            src="/logo-v2.svg"
                             alt="Attitude Émoi"
-                            className="h-16 w-auto"
+                            className="h-12 w-auto"
                         />
                     </Link>
                 </div>

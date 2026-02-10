@@ -133,7 +133,11 @@ export default function EpisodeEditor({ initialData, returnUrl = '/admin/episode
                     <div className="space-y-3">
                         <label className="text-sm font-medium text-gray-700">Thématiques (Catégories)</label>
                         <div className="flex flex-wrap gap-2">
-                            {NAVIGATION_ITEMS.filter(item => item.href !== '/podcast' && item.href !== '/a-propos').map(item => {
+                            {NAVIGATION_ITEMS.flatMap(item => {
+                                if (item.sections) return item.sections;
+                                if (item.subItems) return [item];
+                                return [];
+                            }).map(item => {
                                 const isSelected = categories.includes(item.label);
                                 const colorClass = CATEGORY_COLORS[item.label] || CATEGORY_COLORS['Default'];
 
