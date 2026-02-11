@@ -24,7 +24,7 @@ export function generateArticleSchema(article: Article) {
             name: 'Attitude Émoi',
             logo: {
                 '@type': 'ImageObject',
-                url: `${BASE_URL}/logo-v2.svg` // Updated to correct logo file
+                url: `${BASE_URL}/logo-2-lignes.svg` // Updated to 2-lines logo as requested
             }
         },
         mainEntityOfPage: {
@@ -79,12 +79,29 @@ export function generatePodcastEpisodeSchema(episode: Episode) {
             name: 'Attitude Émoi',
             logo: {
                 '@type': 'ImageObject',
-                url: `${BASE_URL}/logo-v2.svg`
+                url: `${BASE_URL}/logo-2-lignes.svg`
             }
         },
         mainEntityOfPage: {
             '@type': 'WebPage',
             '@id': episodeUrl
         }
+    };
+}
+
+export function generateOrganizationSchema() {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Attitude Émoi',
+        url: BASE_URL,
+        logo: {
+            '@type': 'ImageObject',
+            url: `${BASE_URL}/logo-2-lignes.svg`
+        },
+        sameAs: [
+            'https://www.instagram.com/attitude_emoi', // Add actual social links if available
+            // 'https://www.facebook.com/attitude.emoi' 
+        ]
     };
 }
