@@ -6,6 +6,9 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import Breadcrumb from '@/components/Breadcrumb';
 
+import { generatePodcastEpisodeSchema, generateBreadcrumbSchema } from '@/lib/schema';
+import { getArticleUrl } from '@/lib/constants'; // Potentially needed if used for breadcrumbs, but here we hardcode paths
+
 export async function generateStaticParams() {
     const episodes = await getEpisodes();
     return episodes.map((ep) => ({
@@ -35,8 +38,24 @@ export default async function EpisodePage({ params }: { params: Promise<{ slug: 
         notFound();
     }
 
+    // JSON-LD Generation
+    const episodeSchema = generatePodcastEpisodeSchema(episode);
+    const breadcrumbSchema = generateBreadcrumbSchema([
+        { name: 'Attitude Émoi', item: '/' },
+        { name: 'Podcast', item: '/podcast' },
+        { name: episode.title, item: `/podcast/${episode.slug}` }
+    ]);
+
     return (
         <div className="min-h-screen bg-[#FAF9F6] py-12 px-6">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(episodeSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
             <div className="max-w-4xl mx-auto">
                 {/* Breadcrumb */}
                 <Breadcrumb items={[

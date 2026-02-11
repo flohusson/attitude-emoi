@@ -1,4 +1,4 @@
-import { Article } from '@/lib/schemas';
+import { Article, Episode } from '@/lib/schemas';
 import { getArticleUrl } from './constants';
 
 const BASE_URL = 'https://www.attitude-emoi.fr';
@@ -24,7 +24,7 @@ export function generateArticleSchema(article: Article) {
             name: 'Attitude Émoi',
             logo: {
                 '@type': 'ImageObject',
-                url: `${BASE_URL}/images/logo.png` // Ensure this path is correct or generic
+                url: `${BASE_URL}/logo-v2.svg` // Updated to correct logo file
             }
         },
         mainEntityOfPage: {
@@ -44,5 +44,47 @@ export function generateBreadcrumbSchema(items: { name: string; item: string }[]
             name: item.name,
             item: `${BASE_URL}${item.item}`
         }))
+    };
+}
+
+export function generatePodcastEpisodeSchema(episode: Episode) {
+    const episodeUrl = `${BASE_URL}/podcast/${episode.slug}`;
+
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'PodcastEpisode',
+        name: episode.title,
+        headline: episode.seo?.metaTitle || episode.title,
+        description: episode.seo?.metaDescription || '', // Fallback to empty string if no meta description
+        image: episode.coverImage || episode.seo?.ogImage,
+        datePublished: episode.date,
+        dateModified: episode.date, // Ideally actual modified date if available
+        timeRequired: episode.duration ? `PT${episode.duration.replace(/:/g, 'M')}S` : undefined, // Simple duration parsing if possible, or leave undefined
+        associatedMedia: {
+            '@type': 'MediaObject',
+            contentUrl: episode.audioUrl,
+        },
+        author: {
+            '@type': 'Person',
+            name: 'Florian Husson',
+            url: `${BASE_URL}/a-propos`
+        },
+        partOfSeries: {
+            '@type': 'PodcastSeries',
+            name: 'Attitude Émoi', // Or 'Attitude Podcast' depending on branding
+            url: `${BASE_URL}/podcast`
+        },
+        publisher: { // Added publisher for consistency
+            '@type': 'Organization',
+            name: 'Attitude Émoi',
+            logo: {
+                '@type': 'ImageObject',
+                url: `${BASE_URL}/logo-v2.svg`
+            }
+        },
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': episodeUrl
+        }
     };
 }
